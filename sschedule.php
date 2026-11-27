@@ -12,6 +12,13 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     exit;
 }
 
+$student_id = $_SESSION['user_id'];
+$student_uname = $_SESSION['uname'] ?? $_SESSION['username'] ?? '';
+$subjects_stmt = $conn->prepare("SELECT DISTINCT subject FROM student_registration WHERE subject IS NOT NULL AND TRIM(subject) <> '' AND (id = ? OR uname = ?) ORDER BY subject");
+$subjects_stmt->bind_param("is", $student_id, $student_uname);
+$subjects_stmt->execute();
+$subjects_result = $subjects_stmt->get_result();
+
 $booking_message = ""; // To display success/error messages
 
 // Handle search request
@@ -123,7 +130,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['book_schedule'])) {
                 <form method="POST" id="scheduleForm">
                     <div class="form-group">
                         <label for="subject"><b>Enter Subject:</b></label>
-                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter Subject Name" required>
+                        <select id="subject" name="subject" class="form-control" required>
+                            <option value="">Select Subject</option>
+                            <?php
+                            $registered_subjects = [];
+                            if ($subjects_result):
+                                while ($subject_row = $subjects_result->fetch_assoc()) {
+                                    foreach (explode(',', $subject_row['subject']) as $individual_subject) {
+                                        $individual_subject = trim($individual_subject);
+                                        if ($individual_subject !== '') {
+                                            $registered_subjects[$individual_subject] = $individual_subject;
+                                        }
+                                    }
+                                }
+                                ksort($registered_subjects, SORT_STRING);
+
+                                foreach ($registered_subjects as $individual_subject):
+                            ?>
+                                    <option value="<?= htmlspecialchars($individual_subject, ENT_QUOTES, 'UTF-8') ?>" <?= (isset($_POST['subject']) && $_POST['subject'] === $individual_subject) ? 'selected' : '' ?>><?= htmlspecialchars($individual_subject, ENT_QUOTES, 'UTF-8') ?></option>
+                            <?php endforeach; endif; ?>
+                        </select>
                     </div>
                     
                     <div class="form-group">
@@ -145,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['book_schedule'])) {
                     <table class="table table-striped table-bordered">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Faculty ID</th>
+                                <th>Faculty Name</th>
                                 <th>Subject</th>
                                 <th>Date</th>
                                 <th>Time</th>
@@ -155,7 +181,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['book_schedule'])) {
                         <tbody>
                             <?php while ($row = $result->fetch_assoc()): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($row['faculty_id']) ?></td>
+                                    <?php
+                                    $faculty_stmt = $conn->prepare("SELECT id, tname FROM faculty_registration WHERE id = ?");
+                                    $faculty_stmt->bind_param("i", $row['faculty_id']);
+                                    $faculty_stmt->execute();
+                                    $faculty_result = $faculty_stmt->get_result();
+                                    $faculty_row = $faculty_result->fetch_assoc();
+                                    $tname = $faculty_row['tname'] ?? '';
+                                    ?>
+                                    <td><?= htmlspecialchars($tname, ENT_QUOTES, 'UTF-8') ?></td>
                                     <td><?= htmlspecialchars($row['subject']) ?></td>
                                     <td><?= htmlspecialchars(date("d M Y", strtotime($row['schedule_date']))) ?></td>
                                     <td><?= htmlspecialchars(date("h:i A", strtotime($row['schedule_time']))) ?></td>

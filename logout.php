@@ -26,3 +26,4 @@ session_destroy();
 // Redirect the user
 header("Location: index");
 exit();
+?>

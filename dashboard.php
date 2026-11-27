@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Fetch student data from the database
 include 'header.php';
-include 'menu.php';
+include 'menu2.php';
 $sts='Active';
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM student_registration WHERE id = ?";

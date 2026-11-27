@@ -5,8 +5,8 @@
 
           <li class="dropdown"><a href="#"><span>Slot Booking</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">For Student</a></li>
-              <li><a href="#">For Teacher</a></li>
+              <li><a href="student_booking">For Student</a></li>
+                <li><a href="for_faculty">For Faculty</a></li>
               <hr />
               <li><a href="#">Find a Teacher</a></li>              
               <li><a href="#">Find a Class</a></li>

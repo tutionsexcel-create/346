@@ -25,30 +25,32 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="index">Home</a></li>
+            <li><a href="about_us">About us</a></li>
+            <li><a href="course">Services</a></li>
+            <li><a href="gallery">Gallery</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="t_and_c">Terms of service</a></li>
+            <li><a href="policy">Privacy policy</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Slot Booking</h4>
           <ul>
-            <li><a href="#">For Student</a></li>
-            <li><a href="#">For Faculty</a></li>  
-            <li><a href="#">at Offline</a></li>  
-            <li><a href="#">at Online</a></li>            
+            <li><a href="for_student">For Student</a></li>
+            <li><a href="for_faculty">For Faculty</a></li>
+            <li><a href="find_faculty">Find a Teacher</a></li>
+            <li><a href="find_class">Find a Class</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Administration</h4>
           <ul>
-            <li><a href="#">Cources/Subjects</a></li>
-            <li><a href="#">Student Registration</a></li>
-            <li><a href="#">Faculty Registration</a></li>
+            <li><a href="course">Courses/Subjects</a></li>
+            <li><a href="SRegistration">Student Registration</a></li>
+            <li><a href="Faculty-Registration">Faculty Registration</a></li>
             
           </ul>
         </div>
@@ -57,9 +59,9 @@
           <h4>Download</h4>
           <ul>
             
-            <li><a href="#">Faculty Login</a></li>
-            <li><a href="#">Admissions</a></li>
-            <li><a href="#">Quick Links</a></li>
+            <li><a href="Faculty-Login">Faculty Login</a></li>
+            <li><a href="admissions">Admissions</a></li>
+            <li><a href="quick_links">Quick Links</a></li>
           </ul>
         </div> 
 
@@ -73,7 +75,7 @@
         <!-- You can delete the links only if you've purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="#" >srisoultech.com</a>
+        Designed by <a href="http://srisoultech.com" >srisoultech.com</a>
       </div>
     </div>
 
